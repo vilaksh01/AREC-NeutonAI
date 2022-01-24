@@ -3,6 +3,7 @@
 #include "src/calculator/protocol.h"
 #include "src/calculator/neuton/neuton.h"
 
+#include <Arduino_HTS221.h>
 
 #define LED_RED   22
 #define LED_GREEN 23
@@ -13,6 +14,8 @@ static bool initialised = 0;
 PerformanceReport report;
 ModelInfo info;
 
+float temperature = 0.0;
+float humidity = 0.0;
 
 static void led(uint8_t pin, bool state)
 {
@@ -47,6 +50,11 @@ void setup()
   pinMode(LED_BLUE, OUTPUT);
 
   Serial.begin(9600);
+
+  if (!HTS.begin()) {
+    Serial.println("Failed to initialize humidity temperature sensor!");
+    while (1);
+  }
 }
 
 void loop()
@@ -66,9 +74,24 @@ void loop()
   Serial.println("---------------------------------------------------");
   delay(500);
 
+  temperature = HTS.readTemperature();
+  humidity    = HTS.readHumidity();
+
+  // print each of the sensor values
+  Serial.print("Temperature = ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  Serial.print("Humidity    = ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  // print an empty line
+  Serial.println();
+
   float sample[3] = {
-    30.09,                //humid
-    54.23,                //temp
+    humidity,                //humid
+    temperature,                //temp
     1.0,                   //bias
   };
 

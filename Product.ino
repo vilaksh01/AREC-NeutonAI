@@ -95,7 +95,7 @@ void loop()
     1.0,                   //bias
   };
 
-  //
+  // run inference
   float* result = app_run_inference(sample);
   
   float* value = result[0] >= result[1] ? &result[0] : &result[1];
@@ -120,7 +120,7 @@ void loop()
   }
 
 
-  app_nn_free();
+  app_nn_free();    // release NeuralNet structure
   delay(2000);
 
 }

@@ -3,6 +3,8 @@
 #include "user_app.h"
 #include "timer.h"
 
+#define NEUTON_MEMORY_BENCHMARK
+
 static NeuralNet neuralNet = { 0 };
 static uint32_t memUsage = 0;
 static float usSample = 0;

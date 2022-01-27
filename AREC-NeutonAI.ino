@@ -123,7 +123,7 @@ void loop()
     Serial.println("Unknown");
   }
 
-
+  Serial.println("---------------------------------------------------");
   app_nn_free();    // release NeuralNet structure
   delay(2000);
 

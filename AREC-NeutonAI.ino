@@ -65,8 +65,12 @@ void loop()
   Serial.println(app_inputs_size());
   report.ramUsage = NBytesAllocatedTotal();
   report.flashUsage = app_model_size();
-  Serial.println(report.ramUsage);
-  Serial.println(report.flashUsage);
+  Serial.print("Flash usage: ");
+  Serial.print(report.flashUsage);
+  Serial.println(" bytes");  
+  Serial.print("Ram usage: ");
+  Serial.print(report.ramUsage);  
+  Serial.println(" bytes");  
   Serial.println("---------------------------------------------------");
   delay(200);
   Serial.println(info.rowsCount);
